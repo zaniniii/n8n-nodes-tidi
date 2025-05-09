@@ -1,27 +1,25 @@
-class ApiKeyCredentials {
-  constructor() {
-    this.name = 'apiKeyCredentials';
-    this.displayName = 'Tidi API Key Credentials';
-    this.documentationUrl = 'https://tidi.com.br/docs';
-    this.properties = [
-      {
-        displayName: 'API Key',
-        name: 'apiKey',
-        type: 'string',
-        default: '',
-        required: true,
-        typeOptions: {
-          password: true,
-        },
-      },
-      {
-        displayName: 'Base URL',
-        name: 'baseUrl',
-        type: 'string',
-        default: 'http://api.tidi.com.br/pt',
-        required: true,
-      },
-    ];
-  }
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TidiApi = void 0;
+class TidiApi {
+    constructor() {
+        this.name = 'tidiApi';
+        this.displayName = 'Tidi API';
+        this.documentationUrl = 'https://docs.tidi.com.br';
+        this.properties = [
+            {
+                displayName: 'API Key',
+                name: 'apiKey',
+                type: 'string',
+                default: '',
+            },
+            {
+                displayName: 'API URL',
+                name: 'apiUrl',
+                type: 'string',
+                default: 'https://api.tidi.com.br',
+            },
+        ];
+    }
 }
-module.exports = { ApiKeyCredentials };
+exports.TidiApi = TidiApi;

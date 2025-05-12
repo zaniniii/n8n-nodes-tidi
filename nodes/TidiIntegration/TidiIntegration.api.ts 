@@ -1,0 +1,34 @@
+import { OptionsWithUri } from 'n8n-workflow';
+
+export async function tidiApiRequest(
+    this: any,
+    method: string,
+    endpoint: string,
+    body: any = {},
+    qs: any = {}
+): Promise<any> {
+    const credentials = await this.getCredentials('tidiApiKey');
+
+    const options: OptionsWithUri = {
+        method,
+        headers: {
+            'x-api-key': credentials.apiKey,
+            'Content-Type': 'application/json',
+        },
+        body,
+        qs,
+        uri: `https://api.tidi.com.br ${endpoint}`,
+        json: true,
+    };
+
+    try {
+        return await this.helpers.request(options);
+    } catch (error) {
+        if (error.statusCode === 404) {
+            throw new Error('Parceiro não encontrado');
+        } else if (error.statusCode === 400) {
+            throw new Error('Erro na requisição à API Tidi');
+        }
+        throw error;
+    }
+}

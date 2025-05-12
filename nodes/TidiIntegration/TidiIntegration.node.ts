@@ -14,7 +14,7 @@ export class TidiIntegration implements INodeType {
         },
         credentials: [
             {
-                name: 'tidiApiKey',
+                name: 'tidiApiKeyApi',
                 required: true,
             },
         ],
@@ -23,10 +23,11 @@ export class TidiIntegration implements INodeType {
                 displayName: 'Resource',
                 name: 'resource',
                 type: 'options',
+																noDataExpression: true,
                 options: [
                     { name: 'Partner', value: 'partner' },
-                    { name: 'Services', value: 'services' },
-                    { name: 'Professionals', value: 'professionals' },
+                    { name: 'Service', value: 'services' },
+                    { name: 'Professional', value: 'professionals' },
                     { name: 'Schedule', value: 'schedule' },
                 ],
                 default: 'partner',
@@ -41,6 +42,7 @@ export class TidiIntegration implements INodeType {
                 displayName: 'Operation',
                 name: 'operation',
                 type: 'options',
+																noDataExpression: true,
                 options: [
                     { name: 'Get', value: 'get' },
                     { name: 'Post', value: 'post' },

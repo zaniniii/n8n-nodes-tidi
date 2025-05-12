@@ -1,46 +1,98 @@
-![Banner image](https://user-images.githubusercontent.com/10284570/173569848-c624317f-42b1-45a6-ab09-f0ea3c247648.png)
+# n8n-nodes-tidi
 
-# n8n-nodes-starter
+Este é um nó da comunidade n8n. Ele permite que você utilize a **Tidi** em seus fluxos de trabalho no n8n.
 
-This repo contains example nodes to help you get started building your own custom integrations for [n8n](n8n.io). It includes the node linter and other dependencies.
+**Tidi** é uma plataforma de agendamento e gestão de serviços que permite integrar parceiros, profissionais e serviços em fluxos de trabalho automatizados.
 
-To make your custom node available to the community, you must create it as an npm package, and [submit it to the npm registry](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry).
+[n8n](https://n8n.io/) é uma plataforma de automação de fluxos de trabalho com licença [fair-code](https://docs.n8n.io/reference/license/).
 
-## Prerequisites
+## Sumário
+- [Instalação](#instalação)
+- [Operações](#operações)
+- [Credenciais](#credenciais)
+- [Compatibilidade](#compatibilidade)
+- [Uso](#uso)
+- [Recursos](#recursos)
+- [Histórico de versões](#histórico-de-versões)
 
-You need the following installed on your development machine:
+---
 
-* [git](https://git-scm.com/downloads)
-* Node.js and pnpm. Minimum version Node 18. You can find instructions on how to install both using nvm (Node Version Manager) for Linux, Mac, and WSL [here](https://github.com/nvm-sh/nvm). For Windows users, refer to Microsoft's guide to [Install NodeJS on Windows](https://docs.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-windows).
-* Install n8n with:
-  ```
-  pnpm install n8n -g
-  ```
-* Recommended: follow n8n's guide to [set up your development environment](https://docs.n8n.io/integrations/creating-nodes/build/node-development-environment/).
+## Instalação
 
-## Using this starter
+Siga o [guia de instalação](https://docs.n8n.io/integrations/community-nodes/installation/) na documentação de nós comunitários do n8n.
 
-These are the basic steps for working with the starter. For detailed guidance on creating and publishing nodes, refer to the [documentation](https://docs.n8n.io/integrations/creating-nodes/).
+Para instalar via linha de comando:
+```bash
+npm install n8n-nodes-tidi
+```
 
-1. [Generate a new repository](https://github.com/n8n-io/n8n-nodes-starter/generate) from this template repository.
-2. Clone your new repo:
-   ```
-   git clone https://github.com/<your organization>/<your-repo-name>.git
-   ```
-3. Run `pnpm i` to install dependencies.
-4. Open the project in your editor.
-5. Browse the examples in `/nodes` and `/credentials`. Modify the examples, or replace them with your own nodes.
-6. Update the `package.json` to match your details.
-7. Run `pnpm lint` to check for errors or `pnpm lintfix` to automatically fix errors when possible.
-8. Test your node locally. Refer to [Run your node locally](https://docs.n8n.io/integrations/creating-nodes/test/run-node-locally/) for guidance.
-9. Replace this README with documentation for your node. Use the [README_TEMPLATE](README_TEMPLATE.md) to get started.
-10. Update the LICENSE file to use your details.
-11. [Publish](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry) your package to npm.
+---
 
-## More information
+## Operações
 
-Refer to our [documentation on creating nodes](https://docs.n8n.io/integrations/creating-nodes/) for detailed information on building your own nodes.
+O nó suporta as seguintes operações com a API Tidi:
 
-## License
+| Recurso       | Operação | Descrição                              |
+|--------------|----------|----------------------------------------|
+| Partner      | GET      | Retorna informações do parceiro autenticado |
+| Services     | GET      | Retorna os serviços cadastrados        |
+| Professionals| GET      | Retorna os profissionais vinculados    |
+| Schedule     | POST     | Verifica disponibilidade de agendamento |
 
-[MIT](https://github.com/n8n-io/n8n-nodes-starter/blob/master/LICENSE.md)
+---
+
+## Credenciais
+
+Para utilizar este nó, você precisa de uma **API Key** válida da Tidi.
+
+### Pré-requisitos
+1. Ter uma conta ativa na Tidi
+2. Gerar uma API Key nas configurações do painel do parceiro
+
+### Configuração
+1. No painel do n8n, vá para **Credenciais > Criar Nova**
+2. Selecione **Tidi API Key**
+3. Cole sua API Key no campo correspondente
+
+---
+
+## Compatibilidade
+
+- **Versão mínima do n8n**: v0.166.0
+- **Testado com**: n8n v0.166.0 a v0.170.0
+
+---
+
+## Uso
+
+### Exemplo: Obter informações do parceiro
+1. Adicione o nó Tidi ao fluxo de trabalho
+2. Configure:
+   - Recurso: `Partner`
+   - Operação: `GET`
+   - Idioma: `pt` (ou `en` para inglês)
+
+### Exemplo: Verificar disponibilidade de agendamento
+1. Configure:
+   - Recurso: `Schedule`
+   - Operação: `POST`
+   - Preencha:
+     - ID do Profissional: `id_do_profissional`
+     - IDs dos Serviços: `["id_servico1", "id_servico2"]`
+
+---
+
+## Recursos
+
+* [Documentação oficial do n8n](https://docs.n8n.io/)
+* [Documentação da API Tidi](https://docs.tidi.com.br/) (exemplo)
+* [Código-fonte no GitHub](https://github.com/seu-usuario/n8n-nodes-tidi)
+
+---
+
+## Histórico de versões
+
+### v1.0.0 (2023-11-15)
+- Lançamento inicial
+- Suporte a todas as operações documentadas
+- Implementação completa de autenticação
